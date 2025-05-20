@@ -18,11 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
 
 from main.views import cars_list_view, car_details_view, sales_by_car
 
 
 urlpatterns = [
+    path('', lambda request: redirect('list')),
     path('admin/', admin.site.urls),
     path('cars/', cars_list_view, name='list'),
     path('cars/<int:car_id>/', car_details_view, name='details'),
