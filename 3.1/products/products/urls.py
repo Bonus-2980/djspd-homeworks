@@ -16,12 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from main.views import products_list_view, ProductDetailsView, ProductFilteredReviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', products_list_view),
-    path('products/<int:product_id>/', ProductDetailsView.as_view()),
-    path('products/reviews/<int:product_id>/', ProductFilteredReviews.as_view())
+
+    # Список товаров
+    path('products/', products_list_view, name='product-list'),
+
+    # Детали товара по ID
+    path('products/<int:product_id>/', ProductDetailsView.as_view(), name='product-detail'),
+
+    # Отзывы к товару по ID + фильтрация по оценке через ?mark=
+    path('products/<int:product_id>/reviews/', ProductFilteredReviews.as_view(), name='product-reviews'),
 ]
+
